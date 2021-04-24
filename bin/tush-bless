@@ -7,6 +7,6 @@
 # That's what tush-bless does.
 
 case $# in 
-  1) overwrite ${1} tush-run ${1};;
+  1) overwrite "${1}" tush-run "${1}";;
   *) echo "Usage: $0 tush-script" 1>&2; exit 2
 esac

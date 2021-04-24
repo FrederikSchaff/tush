@@ -22,7 +22,7 @@ PATH=/bin:/usr/bin
 # are arguments to the command.
 
 case $# in 
-  0|1) echo "Usage: `basename $0` file cmd [args]" 1>&2; exit 2
+  0|1) echo "Usage: $(basename "$0") file cmd [args]" 1>&2; exit 2
 esac
 
 file=$1; shift
@@ -37,11 +37,11 @@ trap 'rm -f $new $old; exit 1' 1 2 15 # Clean up files
 
 if PATH=$opath "$@" >$new    # Collect input
 then 
-     cp $file $old           # Save original file
+     cp "$file" $old           # Save original file
      trap '' 1 2 15          # We are committed; ignore signals
-     cp $new $file
+     cp $new "$file"
 else 
-     echo "`basename $0`: $1 failed, $file unchanged" 1>&2
+     echo "$(basename "$0"): $1 failed, $file unchanged" 1>&2
      exit 1
 fi
 
